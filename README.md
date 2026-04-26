@@ -1,6 +1,6 @@
 # 🎓 Sistema de Acesso de Alunos via QR Code
 
-Automação com Google Apps Script para gerar acessos individuais de alunos por meio de QR Codes, garantindo privacidade, organização e escalabilidade.
+Automação com Google Apps Script para gerar acessos individuais de alunos por meio de QR Codes e Web App, garantindo privacidade, organização e escalabilidade.
 
 ---
 
@@ -21,8 +21,9 @@ Este projeto automatiza o processo:
 
 - Cria um documento individual para cada aluno  
 - Gera um link exclusivo de acesso  
-- Cria um QR Code para facilitar o acesso  
-- Mantém os dados atualizados sem alterar o QR Code  
+- Cria QR Codes individuais  
+- Disponibiliza um Web App com QR Code único  
+- Mantém os dados atualizados sem alterar os links  
 
 ---
 
@@ -43,30 +44,37 @@ A solução permitiu:
 - Google Sheets  
 - Google Apps Script (JavaScript)  
 - Google Drive  
+- HTML + JavaScript (interface do Web App)  
 - QuickChart (geração de QR Code)  
 
 ---
 
 ## 🧠 Como funciona
 
-1. A planilha contém:
-   - Nome  
-   - E-mail  
-   - Senha  
+### 🔹 Modelo 1 — QR Code individual
 
-2. O script:
-   - Cria um documento individual no Google Docs  
-   - Gera um link único para cada aluno  
-   - Cria um QR Code com esse link  
-   - Organiza os arquivos em pastas por turma  
-   - Atualiza o documento apenas se a senha mudar  
+1. Cada aluno possui um documento individual  
+2. Um QR Code leva diretamente ao documento  
+3. O aluno acessa apenas suas informações  
+
+---
+
+### 🔹 Modelo 2 — QR Code único (Web App)
+
+1. O aluno escaneia um QR Code geral  
+2. Acessa uma página (Web App)  
+3. Informa:
+   - matrícula  
+   - nome completo  
+4. O sistema valida os dados  
+5. O aluno acessa seu documento individual  
 
 ---
 
 ## 📊 Estrutura da planilha
 
-| Nome | E-mail | Senha | Link | QR Code | URL do QR Code |
-|------|--------|------|------|--------|----------------|
+| ALUNOS | EMAIL | SENHA | Link Individual | QR Code | Link do QR Code | Matrícula |
+|--------|-------|-------|----------------|--------|----------------|-----------|
 
 ---
 
@@ -75,15 +83,7 @@ A solução permitiu:
 - O QR Code não muda  
 - O link permanece o mesmo  
 - O documento é atualizado apenas quando necessário  
-
----
-
-## 📱 Uso
-
-1. Gere os QR Codes pela planilha  
-2. Imprima e distribua aos alunos  
-3. O aluno escaneia o QR Code  
-4. Acessa seu documento com e-mail e senha  
+- Novos alunos são reconhecidos automaticamente  
 
 ---
 
@@ -91,19 +91,20 @@ A solução permitiu:
 
 - Os links são individuais  
 - O acesso é somente leitura  
-- Recomenda-se não compartilhar QR Codes entre alunos  
-- Os dados exibidos neste repositório são fictícios  
+- O Web App exige validação por matrícula e nome  
+- O sistema ignora acentos e diferenças de escrita  
+- Recomenda-se não compartilhar dados pessoais  
 
 ---
 
 ## 🧩 Estrutura do código
 
-O script é dividido em etapas principais:
+O sistema é dividido em:
 
-- leitura dos dados da planilha  
-- verificação de links existentes  
-- criação ou atualização de documentos  
-- geração de QR Codes  
+- geração de documentos e QR Codes  
+- leitura dinâmica da planilha  
+- validação de usuários  
+- Web App para consulta  
 - organização automática no Google Drive  
 
 ---
@@ -115,7 +116,7 @@ disponibilizar e-mails e senhas dos alunos de forma individual, sem expor os dad
 
 Inicialmente, o processo era manual e pouco seguro.
 
-A solução evoluiu para uma automação com Google Apps Script que gera documentos individuais e QR Codes de acesso, garantindo organização, escalabilidade e privacidade.
+A solução evoluiu para uma automação com Google Apps Script que gera documentos individuais, QR Codes e um sistema de consulta via Web App.
 
 ---
 
@@ -125,23 +126,38 @@ A solução evoluiu para uma automação com Google Apps Script que gera documen
 2. Vá em **Extensões → Apps Script**  
 3. Cole o código do projeto  
 4. Execute a função principal  
-5. Autorize as permissões solicitadas  
+5. Publique o Web App  
+6. Gere os QR Codes  
 
 ---
 
 ## 📸 Exemplos
 
-Exemplo da planilha com geração automática de links e QR Codes:
+### Planilha com QR Codes individuais
 
 ![Planilha](imagens/planilha.png)
 
-Exemplo de QR Code gerado para acesso individual:
+---
 
-![QR Code](imagens/qrcode.png)
-
-Exemplo do documento acessado pelo aluno:
+### Documento individual do aluno
 
 ![Documento](imagens/documento.png)
+
+---
+
+### Web App de acesso (QR Code único)
+
+![Web App](imagens/webapp.png)
+
+---
+
+## 📱 Uso prático
+
+O sistema pode ser utilizado por meio de:
+
+- carteirinhas com QR Code  
+- QR Code em murais ou salas  
+- acesso via link compartilhado  
 
 ---
 
