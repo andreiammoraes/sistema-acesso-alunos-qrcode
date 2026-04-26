@@ -1,3 +1,6 @@
+// Sistema de acesso de alunos via QR Code e Web App
+// Projeto educacional com Google Apps Script
+
 function criarLinksTodasTurmas() {
 
   const NOME_PASTA_RAIZ = 'Sistema de Acesso de Alunos via QR Code';
