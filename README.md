@@ -1,68 +1,79 @@
 # 🎓 Sistema de Acesso de Alunos via QR Code
 
-Automação com Google Apps Script para gerar documentos individuais de alunos com acesso via QR Code.
+Automação com Google Apps Script para gerar acessos individuais de alunos por meio de QR Codes, garantindo privacidade e organização dos dados.
 
 ---
 
 ## 📌 Problema
 
-Compartilhar e-mails e senhas dos alunos de forma individual, sem expor os dados da turma.
+Em ambiente escolar, é comum a necessidade de compartilhar e-mails e senhas dos alunos.
+Fazer isso de forma manual pode:
+
+* expor dados de toda a turma
+* gerar desorganização
+* demandar muito tempo
 
 ---
 
 ## ✅ Solução
 
-- Cada aluno possui um documento individual
-- Acesso via QR Code
-- Dados protegidos
-- Atualização automática de senha sem alterar o QR Code
+Este projeto automatiza o processo:
+
+* Cria um documento individual para cada aluno
+* Gera um link exclusivo de acesso
+* Cria um QR Code para facilitar o acesso
+* Mantém os dados atualizados sem alterar o QR Code
 
 ---
 
-## ⚙️ Tecnologias
+## ⚙️ Tecnologias utilizadas
 
-- Google Sheets
-- Google Apps Script (JavaScript)
-- Google Drive
-- QuickChart (QR Code)
+* Google Sheets
+* Google Apps Script (JavaScript)
+* Google Drive
+* QuickChart (geração de QR Code)
 
 ---
 
 ## 🧠 Como funciona
 
-1. Planilha com:
-   - Nome
-   - E-mail
-   - Senha
+1. A planilha contém:
+
+   * Nome
+   * E-mail
+   * Senha
 
 2. O script:
-   - Cria documentos individuais
-   - Gera links únicos
-   - Cria QR Codes
-   - Atualiza dados automaticamente
+
+   * Cria um documento individual no Google Docs
+   * Gera um link único para cada aluno
+   * Cria um QR Code com esse link
+   * Organiza os arquivos em pastas por turma
+   * Atualiza o documento apenas se a senha mudar
 
 ---
 
 ## 📊 Estrutura da planilha
 
-| Nome | E-mail | Senha | Link | QR Code | Link QR |
-|------|--------|------|------|--------|--------|
+| Nome | E-mail | Senha | Link | QR Code | URL do QR Code |
+| ---- | ------ | ----- | ---- | ------- | -------------- |
 
 ---
 
 ## 🔁 Atualizações inteligentes
 
-- QR Code não muda
-- Link permanece o mesmo
-- Documento atualiza apenas quando necessário
+* O QR Code não muda
+* O link permanece o mesmo
+* O documento é atualizado apenas quando necessário
 
 ---
 
 ## 📱 Uso
 
-1. Imprimir QR Codes
-2. Aluno escaneia
-3. Acessa seus dados
+1. Gere os QR Codes pela planilha
+2. Imprima e distribua aos alunos
+3. O aluno escaneia o QR Code
+4. Acessa seu documento com e-mail e senha
 
 ---
 
@@ -73,7 +84,7 @@ disponibilizar e-mails e senhas dos alunos de forma individual, sem expor os dad
 
 Inicialmente, o processo era manual e pouco seguro.
 
-A solução evoluiu para uma automação com Google Apps Script que gera documentos individuais e QR Codes de acesso, garantindo organização e privacidade.
+A solução evoluiu para uma automação com Google Apps Script que gera documentos individuais e QR Codes de acesso, garantindo organização, escalabilidade e privacidade.
 
 ---
 
@@ -81,12 +92,46 @@ A solução evoluiu para uma automação com Google Apps Script que gera documen
 
 1. Abra o Google Sheets
 2. Vá em **Extensões → Apps Script**
-3. Cole o código
-4. Execute a função
-5. Autorize permissões
+3. Cole o código do projeto
+4. Execute a função principal
+5. Autorize as permissões solicitadas
+
+---
+
+## 🔐 Segurança e privacidade
+
+* Os dados exibidos nos exemplos são fictícios
+* Cada aluno acessa apenas suas próprias informações
+* O acesso é feito por link individual via QR Code
+
+---
+
+## 📸 Exemplos
+
+Exemplo da planilha com geração automática de links e QR Codes:
+
+![Planilha](imagens/planilha.png)
+
+Exemplo de QR Code gerado para acesso individual:
+
+![QR Code](imagens/qrcode.png)
+
+Exemplo do documento acessado pelo aluno:
+
+![Documento](imagens/documento.png)
 
 ---
 
 ## 👩‍🏫 Contexto
 
-Projeto desenvolvido para uso real em escola, com foco em organização e segurança.
+Projeto desenvolvido para uso real em ambiente escolar, com foco em:
+
+* organização
+* eficiência
+* privacidade dos dados
+
+---
+
+## 📌 Observação
+
+Este projeto pode ser adaptado para outras aplicações que exijam acesso individualizado via QR Code.
