@@ -7,7 +7,7 @@ Automação com Google Apps Script para gerar e gerenciar acessos individuais de
 ## 🔗 Demonstração
 
 Acesse o sistema:  
-[COLE AQUI SEU LINK OU BITLY]
+https://bit.ly/acessoemailalunos
 
 Para teste:
 
