@@ -120,7 +120,7 @@
 
         google.script.run
           .withSuccessHandler(function(resposta) {
-            if (resposta === "NOT_FOUND") {
+            if (resposta === "NOT_FOUND" || !resposta) {
               resultado.innerHTML = '<p class="erro">Dados não encontrados. Confira a matrícula e o nome completo.</p>';
             } else {
               resultado.innerHTML =
