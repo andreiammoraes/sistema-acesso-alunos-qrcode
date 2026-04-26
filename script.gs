@@ -180,3 +180,94 @@ function criarLinksTodasTurmas() {
     }
   }
 }
+
+// ================================
+// WEB APP - PONTO DE ENTRADA
+// ================================
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('index');
+}
+
+
+// ================================
+// FUNÇÃO PRINCIPAL DE BUSCA
+// ================================
+function buscarAluno(matricula, nome) {
+
+  const planilha = SpreadsheetApp.getActiveSpreadsheet();
+  const abas = planilha.getSheets();
+
+  // normaliza entrada do usuário
+  const matriculaDigitada = matricula.toString().trim();
+  const nomeDigitado = normalizarTexto(nome);
+
+  // percorre todas as abas (turmas)
+  for (let a = 0; a < abas.length; a++) {
+
+    const aba = abas[a];
+    const dados = aba.getDataRange().getValues();
+
+    if (dados.length < 2) continue; // pula abas vazias
+
+    const cabecalho = dados[0];
+
+    // ================================
+    // IDENTIFICA COLUNAS DINAMICAMENTE
+    // ================================
+
+    // Nome (aceita ALUNOS, Nome, etc.)
+    const idxNome = cabecalho.findIndex(col =>
+      col.toString().toLowerCase().includes("aluno")
+    );
+
+    // Matrícula
+    const idxMatricula = cabecalho.findIndex(col =>
+      col.toString().toLowerCase().includes("matr")
+    );
+
+    // Link do documento
+    const idxLink = cabecalho.findIndex(col =>
+      col.toString().toLowerCase().includes("link individual")
+    );
+
+    // se não encontrar as colunas, ignora a aba
+    if (idxNome === -1 || idxMatricula === -1 || idxLink === -1) continue;
+
+    // ================================
+    // PERCORRE OS ALUNOS
+    // ================================
+    for (let i = 1; i < dados.length; i++) {
+
+      const nomePlanilha = normalizarTexto(dados[i][idxNome]);
+      const matriculaPlanilha = dados[i][idxMatricula]?.toString().trim();
+      const link = dados[i][idxLink];
+
+      // ================================
+      // VALIDAÇÃO SEGURA
+      // ================================
+      if (
+        matriculaDigitada === matriculaPlanilha &&
+        nomeDigitado === nomePlanilha
+      ) {
+        return link;
+      }
+    }
+  }
+
+  // se não encontrou
+  return "NOT_FOUND";
+}
+
+
+// ================================
+// FUNÇÃO PARA NORMALIZAR TEXTO
+// ================================
+function normalizarTexto(texto) {
+  return texto
+    .toString()
+    .toLowerCase()
+    .normalize("NFD") // separa acentos
+    .replace(/[\u0300-\u036f]/g, "") // remove acentos
+    .replace(/\s+/g, " ") // remove espaços duplicados
+    .trim();
+}
