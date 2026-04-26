@@ -92,7 +92,7 @@ A solução permitiu:
 - Os links são individuais  
 - O acesso é somente leitura  
 - O Web App exige validação por matrícula e nome  
-- O sistema ignora acentos e diferenças de escrita  
+- O sistema ignora acentos e diferenças de maiúsculas/minúsculas  
 - Recomenda-se não compartilhar dados pessoais  
 
 ---
@@ -125,9 +125,9 @@ A solução evoluiu para uma automação com Google Apps Script que gera documen
 1. Abra o Google Sheets  
 2. Vá em **Extensões → Apps Script**  
 3. Cole o código do projeto  
-4. Execute a função principal  
-5. Publique o Web App  
-6. Gere os QR Codes  
+4. Execute a função `criarLinksTodasTurmas`
+5. Publique o Web App
+6. Gere o QR Code único com o link do Web App  
 
 ---
 
