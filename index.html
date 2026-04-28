@@ -104,7 +104,7 @@
   </div>
 
   <script>
-    const API_URL = 'COLE_AQUI_SEU_LINK_EXEC_DO_APPS_SCRIPT';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxtXatjKFWk8MmJSbNfWbz8ZWZ3MnJBsF6l7lng0GFVQORKlAZE_Rix9BCDiSbOTV92/exec';
 
     function buscar() {
       const matricula = document.getElementById('matricula').value.trim();
@@ -138,7 +138,7 @@
 
       const script = document.createElement('script');
       script.src =
-        https://script.google.com/macros/s/AKfycbxtXatjKFWk8MmJSbNfWbz8ZWZ3MnJBsF6l7lng0GFVQORKlAZE_Rix9BCDiSbOTV92/exec +
+        API_URL +
         '?action=buscar' +
         '&matricula=' + encodeURIComponent(matricula) +
         '&nome=' + encodeURIComponent(nome) +
