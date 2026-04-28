@@ -1,140 +1,151 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <base target="_top">
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #f4f6f8;
-        margin: 0;
-        padding: 0;
-      }
+  <title>Acesso do Estudante</title>
 
-      .container {
-        max-width: 420px;
-        margin: 40px auto;
-        background: white;
-        padding: 28px;
-        border-radius: 16px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        text-align: center;
-      }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
 
-      h1 {
-        font-size: 24px;
-        color: #2E7D32;
-        margin-bottom: 8px;
-      }
+    .container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: white;
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      text-align: center;
+    }
 
-      p {
-        color: #555;
-        font-size: 15px;
-      }
+    h1 {
+      font-size: 24px;
+      color: #2E7D32;
+      margin-bottom: 8px;
+    }
 
-      input {
-        width: 100%;
-        padding: 12px;
-        margin-top: 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 15px;
-        box-sizing: border-box;
-      }
+    p {
+      color: #555;
+      font-size: 15px;
+    }
 
-      button {
-        width: 100%;
-        margin-top: 18px;
-        padding: 12px;
-        background: #2E7D32;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-      }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
 
-      button:hover {
-        background: #1B5E20;
-      }
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 12px;
+      background: #2E7D32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-      #resultado {
-        margin-top: 20px;
-        font-size: 15px;
-      }
+    #resultado {
+      margin-top: 20px;
+      font-size: 15px;
+    }
 
-      .sucesso a {
-        display: inline-block;
-        background: #2E7D32;
-        color: white;
-        text-decoration: none;
-        padding: 12px 18px;
-        border-radius: 8px;
-        margin-top: 10px;
-      }
+    .erro {
+      color: #B00020;
+      font-weight: bold;
+    }
 
-      .erro {
-        color: #B00020;
-        font-weight: bold;
-      }
+    .sucesso a {
+      display: inline-block;
+      background: #2E7D32;
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
 
-      .rodape {
-        margin-top: 24px;
-        font-size: 12px;
-        color: #777;
-      }
-    </style>
-  </head>
+    .rodape {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class="container">
-      <h1>Acesso do Estudante</h1>
+<body>
+  <div class="container">
+    <h1>Acesso do Estudante</h1>
 
-      <p>Digite sua matrícula e seu nome completo para acessar seus dados.</p>
+    <p>Digite sua matrícula e seu nome completo para acessar seus dados.</p>
 
-      <input type="text" id="matricula" placeholder="Matrícula">
+    <input type="text" id="matricula" placeholder="Matrícula">
+    <input type="text" id="nome" placeholder="Nome completo">
 
-      <input type="text" id="nome" placeholder="Nome completo">
+    <button onclick="buscar()">Buscar meus dados</button>
 
-      <button onclick="buscar()">Buscar meus dados</button>
+    <div id="resultado"></div>
 
-      <div id="resultado"></div>
-
-      <div class="rodape">
-        Sistema de acesso individual por QR Code
-      </div>
+    <div class="rodape">
+      Sistema de acesso individual por QR Code
     </div>
+  </div>
 
-    <script>
-      function buscar() {
-        const matricula = document.getElementById("matricula").value.trim();
-        const nome = document.getElementById("nome").value.trim();
-        const resultado = document.getElementById("resultado");
+  <script>
+    const API_URL = 'COLE_AQUI_SEU_LINK_EXEC_DO_APPS_SCRIPT';
 
-        if (!matricula || !nome) {
-          resultado.innerHTML = '<p class="erro">Preencha matrícula e nome completo.</p>';
-          return;
+    function buscar() {
+      const matricula = document.getElementById('matricula').value.trim();
+      const nome = document.getElementById('nome').value.trim();
+      const resultado = document.getElementById('resultado');
+
+      if (!matricula || !nome) {
+        resultado.innerHTML = '<p class="erro">Preencha matrícula e nome completo.</p>';
+        return;
+      }
+
+      resultado.innerHTML = 'Buscando informações...';
+
+      const callbackName = 'callback_' + Date.now();
+
+      window[callbackName] = function(resposta) {
+        if (resposta.status === 'OK') {
+          resultado.innerHTML =
+            '<div class="sucesso">' +
+            '<p>Dados encontrados.</p>' +
+            '<a href="' + resposta.link + '" target="_blank">Abrir meu documento</a>' +
+            '</div>';
+        } else {
+          resultado.innerHTML =
+            '<p class="erro">Dados não encontrados. Confira a matrícula e o nome completo.</p>';
         }
 
-        resultado.innerHTML = "Buscando informações...";
+        delete window[callbackName];
+        document.body.removeChild(script);
+      };
 
-        google.script.run
-          .withSuccessHandler(function(resposta) {
-            if (resposta === "NOT_FOUND" || !resposta) {
-              resultado.innerHTML = '<p class="erro">Dados não encontrados. Confira a matrícula e o nome completo.</p>';
-            } else {
-              resultado.innerHTML =
-                '<div class="sucesso">' +
-                '<p>Dados encontrados.</p>' +
-                '<a href="' + resposta + '" target="_blank">Abrir meu documento</a>' +
-                '</div>';
-            }
-          })
-          .withFailureHandler(function(erro) {
-            resultado.innerHTML = '<p class="erro">Erro ao buscar os dados. Tente novamente.</p>';
-          })
-          .buscarAluno(matricula, nome);
-      }
-    </script>
-  </body>
+      const script = document.createElement('script');
+      script.src =
+        https://script.google.com/macros/s/AKfycbxtXatjKFWk8MmJSbNfWbz8ZWZ3MnJBsF6l7lng0GFVQORKlAZE_Rix9BCDiSbOTV92/exec +
+        '?action=buscar' +
+        '&matricula=' + encodeURIComponent(matricula) +
+        '&nome=' + encodeURIComponent(nome) +
+        '&callback=' + callbackName;
+
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
 </html>
