@@ -106,46 +106,43 @@
   <script>
     const API_URL = 'https://muddy-cherry-e89f.profandreiamoraes.workers.dev/';
 
-    function buscar() {
-      const matricula = document.getElementById('matricula').value.trim();
-      const nome = document.getElementById('nome').value.trim();
-      const resultado = document.getElementById('resultado');
+    async function buscar() {
+  const matricula = document.getElementById('matricula').value.trim();
+  const nome = document.getElementById('nome').value.trim();
+  const resultado = document.getElementById('resultado');
 
-      if (!matricula || !nome) {
-        resultado.innerHTML = '<p class="erro">Preencha matrícula e nome completo.</p>';
-        return;
-      }
+  if (!matricula || !nome) {
+    resultado.innerHTML = '<p class="erro">Preencha matrícula e nome completo.</p>';
+    return;
+  }
 
-      resultado.innerHTML = 'Buscando informações...';
+  resultado.innerHTML = 'Buscando informações...';
 
-      const callbackName = 'callback_' + Date.now();
+  try {
+    const resposta = await fetch(
+      API_URL +
+      '?matricula=' + encodeURIComponent(matricula) +
+      '&nome=' + encodeURIComponent(nome)
+    );
 
-      window[callbackName] = function(resposta) {
-        if (resposta.status === 'OK') {
-          resultado.innerHTML =
-            '<div class="sucesso">' +
-            '<p>Dados encontrados.</p>' +
-            '<a href="' + resposta.link + '" target="_blank">Abrir meu documento</a>' +
-            '</div>';
-        } else {
-          resultado.innerHTML =
-            '<p class="erro">Dados não encontrados. Confira a matrícula e o nome completo.</p>';
-        }
+    const dados = await resposta.json();
 
-        delete window[callbackName];
-        document.body.removeChild(script);
-      };
-
-      const script = document.createElement('script');
-      script.src =
-        API_URL +
-        '?action=buscar' +
-        '&matricula=' + encodeURIComponent(matricula) +
-        '&nome=' + encodeURIComponent(nome) +
-        '&callback=' + callbackName;
-
-      document.body.appendChild(script);
+    if (dados.status === 'OK') {
+      resultado.innerHTML =
+        '<div class="sucesso">' +
+        '<p>Dados encontrados.</p>' +
+        '<a href="' + dados.link + '" target="_blank">Abrir meu documento</a>' +
+        '</div>';
+    } else {
+      resultado.innerHTML =
+        '<p class="erro">Dados não encontrados.</p>';
     }
+
+  } catch (erro) {
+    resultado.innerHTML =
+      '<p class="erro">Erro ao buscar informações.</p>';
+  }
+}
   </script>
 </body>
 </html>
