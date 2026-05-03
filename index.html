@@ -14,6 +14,11 @@
       padding: 0;
     }
 
+    .logo {
+      width: 110px;
+      margin-bottom: 12px;
+    }
+
     .container {
       max-width: 420px;
       margin: 40px auto;
@@ -26,8 +31,14 @@
 
     h1 {
       font-size: 24px;
-      color: #2E7D32;
-      margin-bottom: 8px;
+      color: #1565C0;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 18px;
+      color: #0D47A1;
+      margin-bottom: 6px;
     }
 
     p {
@@ -49,7 +60,7 @@
       width: 100%;
       margin-top: 18px;
       padding: 12px;
-      background: #2E7D32;
+      background: #1565C0;
       color: white;
       border: none;
       border-radius: 8px;
@@ -86,21 +97,25 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Acesso do Estudante</h1>
+  <img src="logo.png" alt="Logo da escola" class="logo">
 
-    <p>Digite sua matrícula e seu nome completo para acessar seus dados.</p>
-
-    <input type="text" id="matricula" placeholder="Matrícula">
-    <input type="text" id="nome" placeholder="Nome completo">
-
-    <button onclick="buscar()">Buscar meus dados</button>
-
-    <div id="resultado"></div>
-
-    <div class="rodape">
-      Sistema de acesso individual por QR Code
-    </div>
+  <h2>EEEB Professor Gentil Viegas Cardoso</h2>
+  
+  <h1>Sistema de Acesso do Estudante</h1>
+  
+  <p>
+    Digite sua matrícula e nome completo para acessar suas informações.
+  </p>
+  
+  <input type="text" id="matricula" placeholder="Matrícula">
+  <input type="text" id="nome" placeholder="Nome completo">
+  
+  <button onclick="buscar()">Buscar meus dados</button>
+  
+  <div id="resultado"></div>
+  
+  <div class="rodape">
+    Desenvolvido por Andréia Moraes
   </div>
 
   <script>
