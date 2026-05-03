@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Acesso do Estudante</title>
 
   <style>
@@ -11,12 +10,7 @@
       font-family: Arial, sans-serif;
       background: #f4f6f8;
       margin: 0;
-      padding: 0;
-    }
-
-    .logo {
-      width: 110px;
-      margin-bottom: 12px;
+      padding: 20px;
     }
 
     .container {
@@ -24,34 +18,41 @@
       margin: 40px auto;
       background: white;
       padding: 28px;
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.12);
       text-align: center;
     }
 
-    h1 {
-      font-size: 24px;
-      color: #1565C0;
-      margin-bottom: 10px;
+    .logo {
+      width: 120px;
+      max-width: 45%;
+      margin-bottom: 14px;
     }
 
     h2 {
       font-size: 18px;
       color: #0D47A1;
-      margin-bottom: 6px;
+      margin: 0 0 6px;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #1565C0;
+      margin: 0 0 12px;
     }
 
     p {
       color: #555;
       font-size: 15px;
+      line-height: 1.4;
     }
 
     input {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       margin-top: 12px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 15px;
       box-sizing: border-box;
     }
@@ -59,13 +60,17 @@
     button {
       width: 100%;
       margin-top: 18px;
-      padding: 12px;
+      padding: 13px;
       background: #1565C0;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 16px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background: #0D47A1;
     }
 
     #resultado {
@@ -80,16 +85,16 @@
 
     .sucesso a {
       display: inline-block;
-      background: #2E7D32;
+      background: #1565C0;
       color: white;
       text-decoration: none;
       padding: 12px 18px;
-      border-radius: 8px;
+      border-radius: 9px;
       margin-top: 10px;
     }
 
     .rodape {
-      margin-top: 24px;
+      margin-top: 26px;
       font-size: 12px;
       color: #777;
     }
@@ -97,67 +102,67 @@
 </head>
 
 <body>
-  <img src="logo.png" alt="Logo da escola" class="logo">
+  <div class="container">
+    <img src="assets/logo.png" alt="Logo da escola" class="logo">
 
-  <h2>EEEB Professor Gentil Viegas Cardoso</h2>
-  
-  <h1>Sistema de Acesso do Estudante</h1>
-  
-  <p>
-    Digite sua matrícula e nome completo para acessar suas informações.
-  </p>
-  
-  <input type="text" id="matricula" placeholder="Matrícula">
-  <input type="text" id="nome" placeholder="Nome completo">
-  
-  <button onclick="buscar()">Buscar meus dados</button>
-  
-  <div id="resultado"></div>
-  
-  <div class="rodape">
-    Desenvolvido por Andréia Moraes
+    <h2>EEEB Professor Gentil Viegas Cardoso</h2>
+
+    <h1>Sistema de Acesso do Estudante</h1>
+
+    <p>Digite sua matrícula e nome completo para acessar suas informações.</p>
+
+    <input type="text" id="matricula" placeholder="Matrícula">
+    <input type="text" id="nome" placeholder="Nome completo">
+
+    <button onclick="buscar()">Buscar meus dados</button>
+
+    <div id="resultado"></div>
+
+    <div class="rodape">
+      Desenvolvido por Andréia Moraes
+    </div>
   </div>
 
   <script>
     const API_URL = 'https://muddy-cherry-e89f.profandreiamoraes.workers.dev/';
 
     async function buscar() {
-  const matricula = document.getElementById('matricula').value.trim();
-  const nome = document.getElementById('nome').value.trim();
-  const resultado = document.getElementById('resultado');
+      const matricula = document.getElementById('matricula').value.trim();
+      const nome = document.getElementById('nome').value.trim();
+      const resultado = document.getElementById('resultado');
 
-  if (!matricula || !nome) {
-    resultado.innerHTML = '<p class="erro">Preencha matrícula e nome completo.</p>';
-    return;
-  }
+      if (!matricula || !nome) {
+        resultado.innerHTML = '<p class="erro">Preencha matrícula e nome completo.</p>';
+        return;
+      }
 
-  resultado.innerHTML = 'Buscando informações...';
+      resultado.innerHTML = 'Buscando informações...';
 
-  try {
-    const resposta = await fetch(
-      API_URL +
-      '?matricula=' + encodeURIComponent(matricula) +
-      '&nome=' + encodeURIComponent(nome)
-    );
+      try {
+        const resposta = await fetch(
+          API_URL +
+          '?matricula=' + encodeURIComponent(matricula) +
+          '&nome=' + encodeURIComponent(nome)
+        );
 
-    const dados = await resposta.json();
+        const dados = await resposta.json();
 
-    if (dados.status === 'OK') {
-      resultado.innerHTML =
-        '<div class="sucesso">' +
-        '<p>Dados encontrados.</p>' +
-        '<a href="' + dados.link + '" target="_blank">Abrir meu documento</a>' +
-        '</div>';
-    } else {
-      resultado.innerHTML =
-        '<p class="erro">Dados não encontrados.</p>';
+        if (dados.status === 'OK') {
+          resultado.innerHTML =
+            '<div class="sucesso">' +
+            '<p>Dados encontrados.</p>' +
+            '<a href="' + dados.link + '" target="_blank">Abrir meu documento</a>' +
+            '</div>';
+        } else {
+          resultado.innerHTML =
+            '<p class="erro">Dados não encontrados. Confira matrícula e nome completo.</p>';
+        }
+
+      } catch (erro) {
+        resultado.innerHTML =
+          '<p class="erro">Erro ao buscar informações. Tente novamente.</p>';
+      }
     }
-
-  } catch (erro) {
-    resultado.innerHTML =
-      '<p class="erro">Erro ao buscar informações.</p>';
-  }
-}
   </script>
 </body>
 </html>
