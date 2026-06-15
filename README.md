@@ -7,7 +7,7 @@ Automação com Google Apps Script para gerar e gerenciar acessos individuais de
 ## 🔗 Demonstração
 
 Acesse o sistema:  
-https://bit.ly/acessoemailalunos
+https://andreiammoraes.github.io/sistema-acesso-alunos-qrcode/
 
 Para teste:
 
